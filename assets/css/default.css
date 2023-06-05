@@ -1,6 +1,8 @@
 :root{
-    --primary-color: #1abc9c;
-    --secondary-color: #ffffff;
+    --primary-color: #941127/*#1abc9c*/;
+    --primary-color-lighten: color-mix(in srgb, var(--primary-color) 80%, white);
+    --secondary-color: #dddddd;
+    --secondary-color-ligthen: color-mix(in srgb, var(--secondary-color) 50%, white);
 }
 
 body {
@@ -9,6 +11,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--secondary-color);
 }
 header{
     padding: 4rem;
@@ -17,7 +20,12 @@ header{
     color: var(--secondary-color);
     font-size: 2rem;
 }
-
+a{
+    color: var(--primary-color);
+}
+a:hover{
+    color: var(--primary-color-lighten);
+}
 footer{
     padding: 4rem;
     text-align: center;
@@ -26,9 +34,43 @@ footer{
     font-size: 2rem;
     margin-top: auto;
 }
+footer p a{
+    color: var(--secondary-color);
+}
+footer p a:hover{
+    text-decoration: none;
+    color: var(--secondary-color-ligthen);
+}
 .main-content{
     padding: 1rem;
     height: auto;
+}
+.table-list{
+    border-collapse: collapse;
+    margin: 25px 0;
+
+}
+.table-list thead tr {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    text-align: left;
+}
+
+.table-list tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.table-list tbody tr:nth-of-type(even) {
+    background-color: var(--secondary-color-ligthen);
+}
+
+.table-list tbody tr:last-of-type {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.table-list th,
+.table-list td {
+    padding: 12px 15px;
 }
 
 nav ul {
@@ -36,15 +78,15 @@ nav ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-  }
+}
   
 nav li {
     float: left;
-  }
+}
   
 nav li:last-child {
     border-right: none;
-  }
+}
   
 nav li a  {
     display: block;
@@ -52,14 +94,22 @@ nav li a  {
     text-align: center;
     padding: 1rem 1rem;
     text-decoration: none;
-  }
+}
   
 nav li a:hover {
     background-color: var(--secondary-color);
     color: var(--primary-color);
-  }
+}
 
 nav li a.active {
     background: var(--secondary-color);
     color: var(--primary-color);
 }
+.preview-screenshot{
+    width: 8rem;
+}
+
+
+
+
+
