@@ -8,16 +8,18 @@ $rowsHeading = [
     'Spiele_ID',
     'Titel',
     'Beschreibung',
+    'Plattform',
+    'Genre',
     'Trailer',
     'Screenshot',
     'Entwickler'
 ];
 //Spalten, nach denen Gefiltert werden darf
+//[table,row,label]
 $rowsFilterable = [
-    'Spiele_ID',
-    'Titel',
-    'Beschreibung',
-    'Entwickler'
+    ['s','Spiele_ID','Spiele_ID'],
+    ['s','Titel','Titel'],
+    ['e','Name','Entwickler']
 ];
 ?>
 
@@ -36,16 +38,46 @@ $rowsFilterable = [
     <tbody>
     <?php
     //SQL String wird erstellt und ausgeführt
-    $query = 'SELECT * FROM spiele s inner join entwickler e on s.Entwickler_ID = e.Entwickler_ID'.$orderBy;
+    $query = '
+        SELECT * FROM spiele s 
+        inner join entwickler e 
+        on s.Entwickler_ID = e.Entwickler_ID 
+        WHERE Titel LIKE "%'.$searchStr.'%"'.$orderBy;
     $results = $dbh->query($query);
     //Es wird für jedes ergebnis eine Reihe erstellt
     foreach ($results as $row) {
+
+        $genreQuery = '
+        SELECT Name FROM genre g
+        INNER JOIN genre_spiele gs
+        on g.Genre_ID = gs.Genre_ID
+        WHERE gs.Spiele_ID = '.$row['Spiele_ID'];
+
+        $genres = $dbh->query($genreQuery);
+        $genresStr ="";
+        foreach ($genres as $genre){
+            $genresStr = $genresStr.$genre['Name'].',';
+        }
+        $plattformQuery = '
+        SELECT Name FROM plattform p
+        INNER JOIN spiele_plattform sp
+        on p.Plattform_ID = sp.Plattform_ID
+        WHERE sp.Spiele_ID = '.$row['Spiele_ID'];
+
+        $plattforms = $dbh->query($plattformQuery);
+        $plattformsStr ="";
+        foreach ($plattforms as $plattform){
+            $plattformsStr = $plattformsStr.$plattform['Name'].',';
+        }
+
         echo '<tr class="main-table-row">';
         echo '<td>' . $row['Spiele_ID'] . '</td>';
-        echo '<td>' . $row['Titel'] . '</td>';
+        echo '<td><a href="./games-detail.php?id='.$row['Spiele_ID'].'">' . $row['Titel'] . '</a></td>';
         echo '<td>' . $row['Beschreibung'] . '</td>';
+        echo '<td>' . $plattformsStr . '</td>';
+        echo '<td>' .$genresStr.'</td>';
         echo '<td><a href="' . $row['Trailer'] . '">' . $row['Trailer'] . '</a></td>';
-        echo '<td><img class="preview-screenshot" src="data:image/jpeg;base64,' . base64_encode($row['Screenshot']) . '"/></td>';
+        echo '<td><img class="preview-screenshot" src="./assets/img/screenshot/'.$row['Screenshot'].'"/></td>';
         echo '<td>' . $row['Name'] . '</td>';
         echo '</tr>';
     }

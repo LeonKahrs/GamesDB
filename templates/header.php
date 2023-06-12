@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
     <link rel="stylesheet" href="../assets/css/default.css">
     <link rel="stylesheet" href="../assets/css/select-dropdown.css">
+    <link rel="stylesheet" href="../assets/css/checklist-dropdown.css">
 
     <title><?php echo $title; ?></title>
 </head>
@@ -31,6 +32,7 @@ function active($current_page)
                 <li><a class="<?php active(''); ?>" href="./">Home</a></li>
                 <li><a class="<?php active('games-list.php'); ?>" href="./games-list.php">Spiele</a></li>
                 <li><a class="<?php active('dev-list.php'); ?>" href="./dev-list.php">Entwickler</a></li>
+                <li><a class="<?php active('admin.php'); ?>" href="./admin.php">Admin</a></li>
                 <li style="float:right"><a class="<?php active('impressum.php'); ?>" href="./impressum.php">Impressum</a></li>
             </ul>
         </nav>

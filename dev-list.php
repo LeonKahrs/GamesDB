@@ -13,13 +13,12 @@ $rowsHeading = [
     'Land'
 ];
 //Spalten, nach denen Gefiltert werden darf
+
 $rowsFilterable = [
-    'Entwickler_ID',
-    'Name',
-    'Gründungsjahr',
-    'Geschichte',
-    'E-Mail',
-    'Land'
+    ['e','Entwickler_ID','Entwickler_ID'],
+    ['e','Name','Name'],
+    ['e','Gründungsjahr','Gründungsjahr'],
+    ['k','Land','Land']
 ];
 ?>
 <?php include("./templates/sort-form.php");//Sortierformular wird eingebunden ?>
@@ -37,7 +36,7 @@ $rowsFilterable = [
     <tbody>
     <?php
     //SQL String wird erstellt und ausgeführt
-    $query = 'SELECT * FROM entwickler e inner join kontaktdaten k on e.Kontaktdaten_ID = k.Kontaktdaten_ID'.$orderBy;
+    $query = 'SELECT * FROM entwickler e inner join kontaktdaten k on e.Kontaktdaten_ID = k.Kontaktdaten_ID WHERE Name LIKE "%'.$searchStr.'%"'.$orderBy;
     $results = $dbh->query($query);
     //Es wird für jedes ergebnis eine Reihe erstellt
     foreach ($results as $row) {

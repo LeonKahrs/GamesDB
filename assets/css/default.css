@@ -1,8 +1,8 @@
 :root{
     --primary-color: #941127/*#1abc9c*/;
-    --primary-color-lighten: color-mix(in srgb, var(--primary-color) 80%, white);
+    --primary-color-lighten: color-mix(in srgb, var(--primary-color) 75%, white);
     --secondary-color: #dddddd;
-    --secondary-color-ligthen: color-mix(in srgb, var(--secondary-color) 50%, white);
+    --secondary-color-ligthen: color-mix(in srgb, var(--secondary-color) 75%, white);
 }
 
 body {
@@ -109,7 +109,45 @@ nav li a.active {
     width: 8rem;
 }
 
+.admin-insert-container{
+    border: solid;
+    border-color: var(--primary-color);
+    margin:2px;
+    display:flex;
+}
 
+.admin-insert-row{
+    border:solid;
+    border-color: var(--primary-color);
+    width:50%;
+    padding: 5px;
+}
 
+.landing-page-content {
+    max-width: 50%;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px;
+    border-radius: 30px;
+    border:solid;
+    border-color: var(--primary-color-lighten);
+}
 
+.detail-page-container{
+    display: flex;
+}
+.detail-picture-container{
+    width: 50%;
+    padding-top: 20px;
 
+}
+.detail-picture{
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.detail-info-container{
+    width: 50%;
+    margin-left: 20px;
+}

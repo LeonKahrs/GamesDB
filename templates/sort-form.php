@@ -5,32 +5,33 @@
         //wenn ein POST existiert, werden die Post variablen definiert
         $selected = $_POST['sort-by'];
         $orderBy = ' ORDER BY '.$selected;
-        if(!in_array($selected,$rowsFilterable)){//überprüfung, ob POST variablen valide sind
-            $selected='';
-            $orderBy = '';
-        }
+        $searchStr = $_POST['searchStr'];
+
     }else{
         $selected='';
         $orderBy = '';
+        $searchStr ='';
     }
     ?>
     <form method="post" action="">
         <div class="select-container">
             <select name="sort-by" id="sort-by">
                 <?php
-                echo '<option value="', $rowsFilterable[0] ,'">Filter wählen</option>';
+                echo '<option value="', $rowsFilterable[0][0].'.'.$rowsFilterable[0][1] ,'">Sortierung wählen</option>';//placehoder für empty
                 foreach ($rowsFilterable as $name) {
-                    if($name == $selected){
-                        echo '<option value="', $name ,'" selected="selected">', $name, '</option>';
+                    if($name[1] == $selected){
+                        echo '<option value="', $name[0].'.'.$name[1] ,'" selected="selected">', $name[2], '</option>';
                     }else{
-                        echo '<option value="', $name ,'">', $name, '</option>';
+                        echo '<option value="', $name[0].'.'.$name[1] ,'">', $name[2], '</option>';
                     }
 
                 }
                 ?>
             </select>
+
         </div>
-        <input type="submit" value="Filter" name="submit" class="submit-button">
+        <input type="text" id="searchStr" name="searchStr" value="" placeholder="Suche" class="searchbar">
+        <input type="submit" value="Filter anwenden" name="submit" class="submit-button">
     </form>
 
 </div>
